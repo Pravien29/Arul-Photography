@@ -32,7 +32,7 @@
 
 // export default Home;
 
-import "./style/tokens.css";
+import "./style/Tokens.css";
 import "./style/Reveal.css";
 
 import IntroVideo from "./IntroVideo";
