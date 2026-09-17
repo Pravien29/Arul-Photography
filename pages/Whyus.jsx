@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Reveal from "./Reveal";
-import "./style/WhyUs.css";
+import "./style/Whyus.css";
 
 const stats = [
   { value: "500+", label: "Weddings shot" },
