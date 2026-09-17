@@ -5,6 +5,7 @@
   right: 0;
   z-index: 100;
   padding: 26px 0;
+  isolation: isolate;
   transition: padding 0.4s var(--ease), background-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
 }
 
@@ -30,6 +31,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
+  z-index: 101;
 }
 .brand-logo { height: 40px; width: auto; }
 .brand-text {
@@ -70,6 +73,8 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
+  z-index: 101;
 }
 .divider {
   width: 1px;
@@ -115,55 +120,6 @@
 .menu-toggle.is-open span:nth-child(2) { opacity: 0; }
 .menu-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 24px; }
 
-.nav-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s var(--ease);
-  z-index: 90;
-}
-.nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
-
-.mobile-nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: min(78vw, 340px);
-  background: var(--ink);
-  z-index: 95;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 110px 32px 40px;
-  transform: translateX(100%);
-  transition: transform 0.45s var(--ease);
-}
-.mobile-nav.is-open { transform: translateX(0); }
-.mobile-nav a {
-  color: var(--mist);
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), color 0.25s var(--ease);
-}
-.mobile-nav.is-open a { opacity: 1; transform: none; }
-.mobile-nav a:hover { color: var(--brass-light); }
-.mobile-book-btn {
-  margin-top: 28px;
-  text-align: center;
-  border: 1px solid var(--brass-light);
-  color: var(--ivory);
-  padding: 14px;
-  border-radius: var(--radius-s);
-  font-weight: 600;
-}
-
 @media (max-width: 900px) {
   .main-nav { display: none; }
   .divider { display: none; }
@@ -171,18 +127,13 @@
   .menu-toggle { display: flex; }
 }
 
-
 /* ---------- Desktop dropdown ---------- */
 .nav-item-dropdown {
   position: relative;
-  /* extend the hoverable area down over the gap between the
-     trigger button and the panel, so onMouseLeave doesn't fire
-     while the cursor is crossing that empty space */
   padding-bottom: 22px;
   margin-bottom: -22px;
 }
 
-/* Trigger is now a flex container: a Link (navigates) + a toggle button (opens submenu) */
 .nav-dropdown-trigger {
   display: inline-flex;
   align-items: center;
@@ -225,7 +176,7 @@
 
 .dropdown-panel {
   position: absolute;
-  top: 100%; /* the 22px gap is now covered by .nav-item-dropdown's padding-bottom */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(6px);
   min-width: 240px;
@@ -246,9 +197,6 @@
   transform: translateX(-50%) translateY(0);
 }
 
-/* Scoped with an extra ancestor class so this reliably beats
-   ".main-nav a" (which would otherwise win on specificity,
-   since these links live inside .main-nav in the DOM) */
 .dropdown-panel a.dropdown-link {
   font-family: var(--font-display);
   font-size: 0.95rem;
@@ -263,30 +211,90 @@
   color: var(--brass-light);
 }
 
-/* ---------- Mobile dropdown (inside drawer) ---------- */
+/* ============================================================
+   Mobile nav — full-screen overlay
+   ============================================================ */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  width: 100%;
+  background: var(--ink);
+  z-index: 95;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease), visibility 0s linear 0.4s;
+}
+.mobile-nav.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s var(--ease), visibility 0s linear 0s;
+}
+
+.mobile-nav-scroll {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: max(120px, calc(env(safe-area-inset-top) + 96px)) var(--gutter)
+    max(48px, calc(env(safe-area-inset-bottom) + 32px));
+}
+
+.mobile-nav-links {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Plain links: these fade themselves in/out */
+.mobile-nav-plain {
+  width: 100%;
+  color: var(--mist);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), color 0.25s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-nav.is-open .mobile-nav-plain,
+.mobile-nav.is-open .mobile-nav-group {
+  opacity: 1;
+  transform: none;
+}
+.mobile-nav-plain:hover { color: var(--brass-light); }
+
+/* Dropdown groups (e.g. Portfolio): the GROUP fades in/out itself.
+   The trigger inside it is a plain child with no opacity of its own,
+   so it isn't left stranded at opacity:0 like before. */
 .mobile-nav-group {
+  width: 100%;
   border-bottom: 1px solid var(--line);
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
 }
-.mobile-nav.is-open .mobile-nav-group {
-  opacity: 1;
-  transform: none;
-}
 
-/* Trigger is now a flex container: a Link (navigates) + a toggle button (opens submenu) */
 .mobile-nav-trigger {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
+  justify-content: center;
+  padding: 16px 0;
+  position: relative;
 }
-
 .mobile-nav-label {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--mist);
   transition: color 0.25s var(--ease);
 }
@@ -296,42 +304,54 @@
 }
 
 .mobile-nav-toggle {
+  position: absolute;
+  right: 0;
   background: none;
   border: none;
-  padding: 4px;
+  padding: 10px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   color: inherit;
 }
-
-.mobile-nav-trigger .nav-dropdown-plus {
-  font-size: 1.1rem;
-}
-.mobile-nav-trigger.is-open .nav-dropdown-plus {
-  transform: rotate(45deg);
-}
+.mobile-nav-trigger .nav-dropdown-plus { font-size: 1.2rem; }
+.mobile-nav-trigger.is-open .nav-dropdown-plus { transform: rotate(45deg); }
 
 .mobile-dropdown-panel {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s var(--ease), padding 0.4s var(--ease);
-  padding: 0 0 0 12px;
 }
 .mobile-dropdown-panel.is-open {
   max-height: 400px;
-  padding: 4px 0 16px 12px;
+  padding: 2px 0 18px;
 }
 .mobile-dropdown-panel a {
-  border-bottom: none;
   font-size: 1.05rem;
-  padding: 8px 0;
+  padding: 10px 0;
   color: var(--mist);
-  opacity: 1;
-  transform: none;
 }
 .mobile-dropdown-panel a:hover {
   color: var(--brass-light);
+}
+
+.mobile-book-btn {
+  width: 100%;
+  max-width: 340px;
+  margin-top: 24px;
+  text-align: center;
+  border: 1px solid var(--brass-light);
+  color: var(--ivory);
+  padding: 16px;
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.mobile-book-btn:hover {
+  background: var(--brass-light);
+  color: var(--ink);
 }
