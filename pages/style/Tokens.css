@@ -1,0 +1,73 @@
+/* ============================================================
+   ARUL PHOTOGRAPHY — design tokens
+   Import this once in your root (e.g. main.jsx / App.jsx):
+   import "./style/tokens.css";
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  /* ---- color: warm ink + ivory, brass & clay accents (no cream/terracotta cliché) ---- */
+  --ink: #16130f;
+  --ink-soft: #221d17;
+  --ivory: #f6f1e6;
+  --paper: #ece3d2;
+  --brass: #a9814a;
+  --brass-light: #cba86a;
+  --clay: #904d38;
+  --stone: #7d7565;
+  --stone-light: #a89f8d;
+  --mist: rgba(246, 241, 230, 0.78);
+  --line: rgba(246, 241, 230, 0.16);
+  --line-dark: rgba(22, 19, 15, 0.12);
+
+  /* ---- type ---- */
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* ---- layout ---- */
+  --container: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --radius-s: 2px;
+
+  /* ---- motion ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; }
+
+.eyebrow-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--brass);
+  font-weight: 600;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

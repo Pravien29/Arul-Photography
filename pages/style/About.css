@@ -1,0 +1,473 @@
+.about-page {
+  width: 100%;
+  background: var(--ink);
+  color: var(--ivory);
+  overflow: hidden;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.about-hero {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 150px 6% 100px;
+  text-align: center;
+}
+
+.about-hero-content {
+  width: 100%;
+  max-width: 850px;
+}
+
+.about-label {
+  display: block;
+  margin-bottom: 25px;
+  color: var(--brass-light);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.about-hero h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.about-hero h1 em {
+  color: var(--brass-light);
+  font-style: italic;
+}
+
+.about-hero p {
+  max-width: 620px;
+  margin: 40px auto 0;
+  color: var(--mist);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+
+/* =========================================
+   DIAMOND GALLERY + CONNECT NOW
+========================================= */
+
+.about-gallery {
+  width: 100%;
+  padding: 40px 6% 160px;
+  display: flex;
+  justify-content: center;
+}
+
+.about-diamond {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+
+  display: grid;
+  grid-template-columns: 1fr 1.05fr 1fr;
+  grid-template-rows: 260px 300px 260px;
+  gap: 28px;
+
+  grid-template-areas:
+    ".    top    ."
+    "left center right"
+    ".    bottom .";
+}
+
+.diamond-image-1 { grid-area: top; }
+.diamond-image-2 { grid-area: left; }
+.diamond-image-3 { grid-area: right; }
+.diamond-image-4 { grid-area: bottom; }
+
+.diamond-image {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid var(--line);
+}
+
+.diamond-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+
+  transition:
+    transform 1s var(--ease),
+    filter 1s var(--ease);
+
+  filter: grayscale(15%);
+}
+
+.diamond-image:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+/* Centre — connect now sits where a fifth image would go */
+
+.diamond-center {
+  grid-area: center;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diamond-center-ring {
+  position: absolute;
+  inset: 8%;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+.diamond-center .connect-now-btn {
+  margin-top: 0;
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================================
+   CONNECT BUTTON
+========================================= */
+
+.connect-now-btn {
+  margin-top: 45px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  padding: 15px 26px;
+
+  border: 1px solid var(--brass-light);
+  border-radius: var(--radius-s);
+
+  background: transparent;
+  color: var(--ivory);
+
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s var(--ease),
+    color 0.3s var(--ease),
+    gap 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.connect-now-btn span {
+  font-size: 1.1rem;
+  transition: transform 0.3s var(--ease);
+}
+
+.connect-now-btn:hover {
+  background: var(--brass-light);
+  color: var(--ink);
+  gap: 25px;
+  box-shadow: 0 0 0 6px rgba(196, 162, 105, 0.12);
+}
+
+.connect-now-btn:hover span {
+  transform: translateX(4px);
+}
+
+.connect-now-btn:focus-visible {
+  outline: 2px solid var(--brass-light);
+  outline-offset: 4px;
+}
+
+
+/* =========================================
+   STORY SECTION
+========================================= */
+
+.about-story {
+  width: 100%;
+  padding: 140px 6%;
+
+  display: flex;
+  justify-content: center;
+
+  border-top: 1px solid var(--line);
+}
+
+.about-story-content {
+  max-width: 750px;
+  text-align: center;
+}
+
+.about-story h2 {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.about-story h2 em {
+  color: var(--brass-light);
+  font-style: italic;
+}
+
+.about-story p {
+  max-width: 650px;
+  margin: 35px auto 0;
+
+  color: var(--mist);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+
+/* =========================================
+   HIGHLIGHTS
+========================================= */
+
+.about-highlights {
+  width: 100%;
+  padding: 120px 6%;
+
+  display: flex;
+  justify-content: center;
+
+  border-top: 1px solid var(--line);
+}
+
+.about-highlights-content {
+  width: 100%;
+  max-width: 950px;
+  text-align: center;
+}
+
+.about-highlights h2 {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.about-highlights h2 em {
+  color: var(--brass-light);
+  font-style: italic;
+}
+
+.highlights-grid {
+  margin-top: 70px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.highlight-item {
+  padding: 0 35px;
+  border-left: 1px solid var(--line);
+}
+
+.highlight-item:first-child {
+  border-left: none;
+}
+
+.highlight-item strong {
+  display: block;
+
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--brass-light);
+}
+
+.highlight-item p {
+  margin: 16px 0 0;
+
+  color: var(--mist);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   CLOSING CTA
+========================================= */
+
+.about-closing {
+  width: 100%;
+  padding: 130px 6% 160px;
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  border-top: 1px solid var(--line);
+}
+
+.about-closing-content {
+  max-width: 700px;
+}
+
+.about-closing h2 {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.about-closing h2 em {
+  color: var(--brass-light);
+  font-style: italic;
+}
+
+.about-closing p {
+  margin: 30px auto 0;
+
+  color: var(--mist);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .about-hero {
+    min-height: 65vh;
+    padding-top: 130px;
+  }
+
+  .about-diamond {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 220px 220px 180px;
+    grid-template-areas:
+      "top   left"
+      "top   right"
+      "bottom bottom"
+      "center center";
+    gap: 20px;
+  }
+
+  .diamond-center {
+    padding-top: 10px;
+  }
+
+  .diamond-center-ring {
+    display: none;
+  }
+
+  .about-highlights {
+    padding: 100px 6%;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+    row-gap: 45px;
+  }
+
+  .highlight-item {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding: 35px 0 0;
+  }
+
+  .highlight-item:first-child {
+    border-top: none;
+    padding-top: 0;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .about-hero {
+    min-height: auto;
+    padding: 120px 7% 80px;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .about-hero p {
+    margin-top: 30px;
+    font-size: 0.9rem;
+  }
+
+  .about-gallery {
+    padding: 20px 7% 100px;
+  }
+
+  .about-diamond {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .diamond-image {
+    width: 100%;
+    height: 320px;
+  }
+
+  .diamond-center {
+    order: 5;
+    padding: 20px 0 0;
+  }
+
+  .about-story {
+    padding: 100px 7%;
+  }
+
+  .about-story h2 {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+  }
+
+  .about-story p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .about-highlights {
+    padding: 80px 7%;
+  }
+
+  .highlights-grid {
+    margin-top: 45px;
+  }
+
+  .about-closing {
+    padding: 90px 7% 110px;
+  }
+
+  .about-closing p {
+    font-size: 0.9rem;
+  }
+}

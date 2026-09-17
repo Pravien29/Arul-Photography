@@ -1,0 +1,337 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 26px 0;
+  transition: padding 0.4s var(--ease), background-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.site-header.is-scrolled,
+.site-header.menu-is-open {
+  padding: 14px 0;
+  background: rgba(22, 19, 15, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.header-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-logo { height: 40px; width: auto; }
+.brand-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ivory);
+  letter-spacing: 0.01em;
+}
+.brand-text em { color: var(--brass-light); font-style: italic; }
+
+.main-nav {
+  display: flex;
+  gap: 34px;
+}
+.main-nav a {
+  color: var(--mist);
+  font-size: 0.92rem;
+  font-weight: 500;
+  position: relative;
+  padding: 4px 0;
+  transition: color 0.25s var(--ease);
+}
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 1px;
+  background: var(--brass-light);
+  transition: width 0.3s var(--ease);
+}
+.main-nav a:hover { color: var(--ivory); }
+.main-nav a:hover::after { width: 100%; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.divider {
+  width: 1px;
+  height: 22px;
+  background: var(--line);
+}
+.book-btn {
+  border: 1px solid var(--brass-light);
+  color: var(--ivory);
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-s);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+  white-space: nowrap;
+}
+.book-btn:hover {
+  background: var(--brass-light);
+  color: var(--ink);
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.menu-toggle span {
+  display: block;
+  height: 1px;
+  background: var(--ivory);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.menu-toggle span:nth-child(1) { width: 24px; }
+.menu-toggle span:nth-child(2) { width: 18px; align-self: flex-end; }
+.menu-toggle span:nth-child(3) { width: 24px; }
+.menu-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); width: 24px; }
+.menu-toggle.is-open span:nth-child(2) { opacity: 0; }
+.menu-toggle.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); width: 24px; }
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease);
+  z-index: 90;
+}
+.nav-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(78vw, 340px);
+  background: var(--ink);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 110px 32px 40px;
+  transform: translateX(100%);
+  transition: transform 0.45s var(--ease);
+}
+.mobile-nav.is-open { transform: translateX(0); }
+.mobile-nav a {
+  color: var(--mist);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease), color 0.25s var(--ease);
+}
+.mobile-nav.is-open a { opacity: 1; transform: none; }
+.mobile-nav a:hover { color: var(--brass-light); }
+.mobile-book-btn {
+  margin-top: 28px;
+  text-align: center;
+  border: 1px solid var(--brass-light);
+  color: var(--ivory);
+  padding: 14px;
+  border-radius: var(--radius-s);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .main-nav { display: none; }
+  .divider { display: none; }
+  .book-btn { display: none; }
+  .menu-toggle { display: flex; }
+}
+
+
+/* ---------- Desktop dropdown ---------- */
+.nav-item-dropdown {
+  position: relative;
+  /* extend the hoverable area down over the gap between the
+     trigger button and the panel, so onMouseLeave doesn't fire
+     while the cursor is crossing that empty space */
+  padding-bottom: 22px;
+  margin-bottom: -22px;
+}
+
+/* Trigger is now a flex container: a Link (navigates) + a toggle button (opens submenu) */
+.nav-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+}
+
+.nav-dropdown-label {
+  font-family: inherit;
+  color: var(--mist);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color 0.25s var(--ease);
+}
+.nav-dropdown-trigger:hover .nav-dropdown-label,
+.nav-dropdown-trigger.is-open .nav-dropdown-label {
+  color: var(--ivory);
+}
+
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+}
+
+.nav-dropdown-plus {
+  font-size: 0.8rem;
+  color: var(--brass-light);
+  transition: transform 0.3s var(--ease);
+  display: inline-block;
+}
+.nav-dropdown-trigger.is-open .nav-dropdown-plus {
+  transform: rotate(45deg);
+}
+
+.dropdown-panel {
+  position: absolute;
+  top: 100%; /* the 22px gap is now covered by .nav-item-dropdown's padding-bottom */
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 240px;
+  background: var(--ivory);
+  border-radius: var(--radius-s);
+  padding: 30px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.dropdown-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Scoped with an extra ancestor class so this reliably beats
+   ".main-nav a" (which would otherwise win on specificity,
+   since these links live inside .main-nav in the DOM) */
+.dropdown-panel a.dropdown-link {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink);
+  padding-bottom: 4px;
+  transition: color 0.25s var(--ease);
+}
+.dropdown-panel a.dropdown-link:hover {
+  color: var(--brass-light);
+}
+
+/* ---------- Mobile dropdown (inside drawer) ---------- */
+.mobile-nav-group {
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.mobile-nav.is-open .mobile-nav-group {
+  opacity: 1;
+  transform: none;
+}
+
+/* Trigger is now a flex container: a Link (navigates) + a toggle button (opens submenu) */
+.mobile-nav-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.mobile-nav-label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--mist);
+  transition: color 0.25s var(--ease);
+}
+.mobile-nav-trigger.is-open .mobile-nav-label,
+.mobile-nav-trigger:hover .mobile-nav-label {
+  color: var(--brass-light);
+}
+
+.mobile-nav-toggle {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+}
+
+.mobile-nav-trigger .nav-dropdown-plus {
+  font-size: 1.1rem;
+}
+.mobile-nav-trigger.is-open .nav-dropdown-plus {
+  transform: rotate(45deg);
+}
+
+.mobile-dropdown-panel {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease), padding 0.4s var(--ease);
+  padding: 0 0 0 12px;
+}
+.mobile-dropdown-panel.is-open {
+  max-height: 400px;
+  padding: 4px 0 16px 12px;
+}
+.mobile-dropdown-panel a {
+  border-bottom: none;
+  font-size: 1.05rem;
+  padding: 8px 0;
+  color: var(--mist);
+  opacity: 1;
+  transform: none;
+}
+.mobile-dropdown-panel a:hover {
+  color: var(--brass-light);
+}

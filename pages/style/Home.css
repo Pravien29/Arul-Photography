@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap");
+@import "./animations.css";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.home {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  color: #141414;
+  overflow-x: hidden;
+}
+
+.home h1,
+.home h2,
+.home h3,
+.home h4 {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* premium display italic used for the accent word inside headings */
+.home em,
+.home .script {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.home button {
+  font-family: inherit;
+}
+
+.home ::selection {
+  background: #e2632f;
+  color: #fff;
+}
+
+/* generic premium button micro-interaction, reused across sections */
+.home .btn-dark,
+.home .btn-outline,
+.home .book-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.home .btn-dark:hover,
+.home .btn-outline:hover,
+.home .book-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(226, 99, 47, 0.28);
+}
+
+.home .btn-ghost,
+.home .btn-ghost-dark {
+  transition: all 0.3s ease;
+}
+
+.home .btn-ghost:hover,
+.home .btn-ghost-dark:hover {
+  background: #141414;
+  color: #fff;
+  border-color: #141414;
+  transform: translateY(-2px);
+}

@@ -1,0 +1,70 @@
+.connect {
+  position: relative;
+  min-height: 62vh;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.connect-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 13, 10, 0.62);
+}
+
+.connect-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 560px;
+  padding: 0 var(--gutter);
+}
+
+.connect-content h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: var(--ivory);
+  margin: 12px 0 20px;
+}
+
+.connect-text {
+  color: var(--mist);
+  font-size: 1.05rem;
+  margin: 0 0 32px;
+}
+
+.connect-btn {
+  display: inline-block;
+  background: var(--brass-light);
+  color: var(--ink);
+  padding: 15px 38px;
+  font-weight: 600;
+  border-radius: var(--radius-s);
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+}
+.connect-btn:hover {
+  background: var(--ivory);
+  transform: translateY(-2px);
+}
+
+.connect-socials {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 40px;
+}
+.connect-socials a {
+  color: var(--mist);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.connect-socials a:hover {
+  color: var(--ivory);
+  border-color: var(--brass-light);
+}

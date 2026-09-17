@@ -1,0 +1,129 @@
+/* .intro-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.6s var(--ease);
+}
+.intro-splash.is-closing { opacity: 0; }
+
+.intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.intro-logo {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--ivory);
+  letter-spacing: 0.01em;
+}
+.intro-logo em { color: var(--brass-light); font-style: italic; }
+
+.intro-skip {
+  position: absolute;
+  z-index: 1;
+  bottom: 32px;
+  right: 32px;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--mist);
+  padding: 9px 20px;
+  font-size: 0.8rem;
+  border-radius: var(--radius-s);
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.intro-skip:hover { border-color: var(--brass-light); color: var(--ivory); }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-splash { display: none; }
+} */
+
+.video-section {
+  width: 100%;
+  padding: 100px 6%;
+  background: var(--ink);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-s);
+  background: #000;
+}
+
+.section-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  color: var(--ivory);
+}
+
+.video-overlay span {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--brass-light);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.video-overlay h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+}
+
+.video-overlay em {
+  color: var(--brass-light);
+  font-style: italic;
+}
+
+.video-loading {
+  max-width: 1200px;
+  height: 300px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--mist);
+}
+
+@media (max-width: 768px) {
+  .video-section {
+    padding: 70px 5%;
+  }
+
+  .video-container {
+    height: 450px;
+  }
+}

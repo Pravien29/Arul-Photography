@@ -1,0 +1,89 @@
+/* App.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --paper: #faf8f3;
+  --paper-alt: #f1ece2;
+  --ink: #23221e;
+  --ink-soft: #6e6a5d;
+  --accent: #6e7d5a;
+  --accent-deep: #4f5c45;
+  --accent-tint: rgba(110, 125, 90, 0.1);
+  --line: rgba(35, 34, 30, 0.12);
+  --line-soft: rgba(35, 34, 30, 0.07);
+  --shadow-card: 0 24px 48px -28px rgba(35, 34, 30, 0.4);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--paper);
+}
+
+/* Text selection */
+::selection {
+  background-color: var(--accent-tint);
+  color: var(--ink);
+}
+
+/* Scrollbar (WebKit browsers) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
+  border-radius: 999px;
+  border: 2px solid var(--paper);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ink-soft);
+}
+
+/* Consistent focus visibility across the app */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

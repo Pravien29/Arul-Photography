@@ -1,0 +1,129 @@
+/* Intro */
+.pf-intro {
+  background: var(--ivory, #eeece5);
+  padding: clamp(70px, 10vw, 110px) var(--gutter, 24px) clamp(50px, 8vw, 90px);
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pf-eyebrow {
+  color: #7a7369;
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.pf-intro h1 {
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-weight: 700;
+  color: #1c1a17;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin: 0 0 22px;
+}
+
+.pf-desc {
+  color: #4b5563;
+  font-family: var(--font-display, "Playfair Display", serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* Grid */
+.pf-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+}
+
+.pf-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease, ease), transform 0.8s var(--ease, ease);
+}
+
+.pf-card.pf-in-view {
+  opacity: 1;
+  transform: none;
+}
+
+.pf-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease, ease), filter 0.6s var(--ease, ease);
+}
+
+.pf-card:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.75);
+}
+
+.pf-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.35)
+  );
+}
+
+.pf-card-title {
+  font-family: var(--font-display, "Playfair Display", serif);
+  color: #fff;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.pf-card-title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transform: translateX(-50%);
+  transition: width 0.4s var(--ease, ease);
+}
+
+.pf-card:hover .pf-card-title::after {
+  width: 60px;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .pf-grid {
+    grid-template-columns: 1fr;
+  }
+  .pf-card {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-card,
+  .pf-card img {
+    transition: none !important;
+  }
+  .pf-card {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,808 @@
+/* =========================================================
+   PORTFOLIO PAGE
+   Cinematic Photography Style
+========================================================= */
+
+:root {
+  --pf-bg: #0a0a0a;
+  --pf-bg-soft: #111111;
+  --pf-text: #ffffff;
+  --pf-muted: #a5a5a5;
+  --pf-line: rgba(255, 255, 255, 0.12);
+  --pf-gold: #d4af6a;
+}
+
+
+/* =========================================================
+   PAGE BASE
+========================================================= */
+
+.pf-intro,
+.pf-grid {
+  box-sizing: border-box;
+}
+
+.pf-intro *,
+.pf-grid * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   INTRO SECTION
+========================================================= */
+
+.pf-intro {
+  position: relative;
+  width: 100%;
+  min-height: 55vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 120px 8% 80px;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(212, 175, 106, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #080808 0%,
+      #0d0d0d 100%
+    );
+
+  overflow: hidden;
+}
+
+
+/* Decorative top line */
+
+.pf-intro::before {
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 50%;
+
+  width: 1px;
+  height: 90px;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--pf-gold)
+  );
+
+  transform: translateX(-50%);
+  opacity: 0.7;
+}
+
+
+/* Decorative bottom glow */
+
+.pf-intro::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: -150px;
+  left: 50%;
+
+  width: 500px;
+  height: 300px;
+
+  transform: translateX(-50%);
+
+  background: rgba(212, 175, 106, 0.06);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.pf-eyebrow {
+  position: relative;
+
+  margin: 0 0 24px;
+
+  color: var(--pf-gold);
+
+  font-size: 12px;
+  font-weight: 500;
+
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+
+  opacity: 0;
+
+  animation: pfFadeUp 0.9s ease forwards;
+}
+
+
+/* Lines around eyebrow */
+
+.pf-eyebrow::before,
+.pf-eyebrow::after {
+  content: "";
+
+  display: inline-block;
+
+  width: 45px;
+  height: 1px;
+
+  vertical-align: middle;
+
+  background: var(--pf-gold);
+
+  opacity: 0.6;
+}
+
+.pf-eyebrow::before {
+  margin-right: 18px;
+}
+
+.pf-eyebrow::after {
+  margin-left: 18px;
+}
+
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.pf-intro h1 {
+  position: relative;
+
+  margin: 0;
+
+  color: var(--pf-text);
+
+  font-family:
+    "Playfair Display",
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(48px, 7vw, 105px);
+
+  font-weight: 400;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.035em;
+
+  opacity: 0;
+
+  animation: pfTitleReveal 1s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    0.12s forwards;
+}
+
+
+/* Gold underline */
+
+.pf-intro h1::after {
+  content: "";
+
+  display: block;
+
+  width: 70px;
+  height: 1px;
+
+  margin: 32px auto 0;
+
+  background: var(--pf-gold);
+
+  transform: scaleX(0);
+
+  transform-origin: center;
+
+  animation: pfLineReveal 0.8s ease
+    0.75s forwards;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.pf-desc {
+  width: min(850px, 100%);
+
+  margin: 38px auto 0;
+
+  color: var(--pf-muted);
+
+  font-size: 15px;
+
+  font-weight: 300;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.015em;
+
+  opacity: 0;
+
+  animation: pfFadeUp 1s ease
+    0.45s forwards;
+}
+
+
+/* =========================================================
+   PORTFOLIO GRID
+========================================================= */
+
+.pf-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+
+  padding: 20px 5% 100px;
+
+  background: #0a0a0a;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.pf-card {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  height: 600px;
+
+  overflow: hidden;
+
+  text-decoration: none;
+
+  background: #151515;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  opacity: 0;
+
+  transform: translateY(70px) scale(0.97);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s
+      cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s ease;
+}
+
+
+/* Reveal state from React */
+
+.pf-card.pf-in-view {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* =========================================================
+   CARD IMAGE
+========================================================= */
+
+.pf-card img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transform: scale(1.02);
+
+  filter:
+    brightness(0.78)
+    saturate(0.88);
+
+  transition:
+    transform 1.2s
+      cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.8s ease;
+}
+
+
+/* =========================================================
+   DARK CINEMATIC GRADIENT
+========================================================= */
+
+.pf-card::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.05) 20%,
+      rgba(0, 0, 0, 0.2) 45%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.6s ease;
+}
+
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.pf-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  padding: 40px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.pf-card-title {
+  position: relative;
+
+  display: inline-block;
+
+  color: #fff;
+
+  font-family:
+    "Playfair Display",
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(30px, 4vw, 52px);
+
+  font-weight: 400;
+
+  letter-spacing: -0.02em;
+
+  line-height: 1;
+
+  transform: translateY(12px);
+
+  transition:
+    transform 0.6s
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* Title underline */
+
+.pf-card-title::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -12px;
+
+  width: 45px;
+  height: 1px;
+
+  background: var(--pf-gold);
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition:
+    transform 0.5s
+    cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.pf-card:hover {
+  border-color: rgba(212, 175, 106, 0.55);
+}
+
+.pf-card:hover img {
+  transform: scale(1.09);
+
+  filter:
+    brightness(0.9)
+    saturate(1);
+}
+
+.pf-card:hover::after {
+  opacity: 0.75;
+}
+
+.pf-card:hover .pf-card-title {
+  transform: translateY(0);
+}
+
+.pf-card:hover .pf-card-title::after {
+  transform: scaleX(1);
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.pf-card:focus-visible {
+  outline: 2px solid var(--pf-gold);
+
+  outline-offset: 5px;
+}
+
+
+/* =========================================================
+   CARD SHINE EFFECT
+========================================================= */
+
+.pf-card::before {
+  content: "";
+
+  position: absolute;
+
+  z-index: 3;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 1s ease;
+
+  pointer-events: none;
+}
+
+.pf-card:hover::before {
+  left: 140%;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes pfFadeUp {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+@keyframes pfTitleReveal {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(45px)
+      scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+@keyframes pfLineReveal {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .pf-intro {
+    min-height: 50vh;
+
+    padding:
+      110px
+      6%
+      70px;
+  }
+
+  .pf-desc {
+    max-width: 700px;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+  }
+
+  .pf-grid {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    padding:
+      15px
+      4%
+      80px;
+  }
+
+  .pf-card {
+    height: 560px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .pf-intro {
+    min-height: auto;
+
+    padding:
+      110px
+      22px
+      65px;
+  }
+
+
+  .pf-intro::before {
+    height: 65px;
+  }
+
+
+  .pf-eyebrow {
+    margin-bottom: 20px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.2em;
+  }
+
+
+  .pf-eyebrow::before,
+  .pf-eyebrow::after {
+    width: 22px;
+  }
+
+  .pf-eyebrow::before {
+    margin-right: 10px;
+  }
+
+  .pf-eyebrow::after {
+    margin-left: 10px;
+  }
+
+
+  .pf-intro h1 {
+    font-size: clamp(
+      44px,
+      14vw,
+      65px
+    );
+
+    letter-spacing: -0.04em;
+  }
+
+
+  .pf-intro h1::after {
+    width: 50px;
+
+    margin-top: 24px;
+  }
+
+
+  .pf-desc {
+    margin-top: 30px;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #999;
+  }
+
+
+  .pf-grid {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+
+    padding:
+      10px
+      12px
+      60px;
+  }
+
+
+  .pf-card {
+    height: 480px;
+
+    transform:
+      translateY(45px)
+      scale(0.98);
+  }
+
+
+  .pf-card-overlay {
+    padding: 25px;
+  }
+
+
+  .pf-card-title {
+    font-size: 34px;
+
+    transform: translateY(0);
+  }
+
+
+  .pf-card-title::after {
+    bottom: -9px;
+
+    width: 35px;
+  }
+
+
+  /*
+    Disable heavy hover zoom on touch devices.
+    This prevents accidental zoom-like effects.
+  */
+
+  .pf-card:hover img {
+    transform: scale(1.04);
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .pf-intro {
+    padding:
+      100px
+      18px
+      55px;
+  }
+
+
+  .pf-eyebrow {
+    font-size: 8px;
+  }
+
+
+  .pf-intro h1 {
+    font-size: 42px;
+  }
+
+
+  .pf-desc {
+    font-size: 12px;
+  }
+
+
+  .pf-card {
+    height: 400px;
+  }
+
+
+  .pf-card-overlay {
+    padding: 20px;
+  }
+
+
+  .pf-card-title {
+    font-size: 30px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   Accessibility
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .pf-eyebrow,
+  .pf-intro h1,
+  .pf-intro h1::after,
+  .pf-desc {
+    animation: none;
+
+    opacity: 1;
+
+    transform: none;
+  }
+
+
+  .pf-card {
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
+  }
+
+
+  .pf-card img,
+  .pf-card-title,
+  .pf-card-title::after,
+  .pf-card::before {
+    transition: none;
+  }
+}
